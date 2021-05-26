@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_detection"
+        android:title="Detect"
+        android:icon="@drawable/detect"/>
+    <item
+        android:id="@+id/nav_news"
+        android:title="News"
+        android:icon="@drawable/detect"/>
+    <item
+        android:id="@+id/nav_air_uqality"
+        android:title="Air Quality"
+        android:icon="@drawable/detect"/>
+</menu>
