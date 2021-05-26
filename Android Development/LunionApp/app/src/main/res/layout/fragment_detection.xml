@@ -1,28 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".DetectionFragment">
+    tools:context=".ui.DetectionFragment">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bagian detection" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/detect_page_title"
+        android:textColor="@color/primary_color"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_diagnose_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_title"
+        tools:text="Asthma Diagnose" />
+
+    <ImageView
+        android:id="@+id/img_lung"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/cd_lung"
+        android:src="@drawable/lungs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <TextView
+        android:id="@+id/tv_result_diagnose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_lung"
+        android:text="@string/text_result_diagnose" />
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result_diagnose"
+        tools:text="@string/tv_file_name" />
 
     <Button
-        android:id="@+id/select_file"
+        android:id="@+id/btn_select_file"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="select file" />
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_select_file"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_file_name" />
 
     <Button
-        android:id="@+id/detect_lung"
+        android:id="@+id/btn_detect_lung"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="detection" />
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_detect_lung"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_select_file" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
