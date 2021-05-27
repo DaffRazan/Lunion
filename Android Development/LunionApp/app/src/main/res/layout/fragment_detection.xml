@@ -1,28 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    tools:context=".DetectionFragment">
+    tools:context=".ui.DetectionFragment">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/detect_page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bagian detection" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/detect_page_title"
+        android:textColor="@color/primary_color"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detect_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/tv_detect_page"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detect_page_title" />
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="@string/tv_file_name" />
 
     <Button
-        android:id="@+id/select_file"
+        android:id="@+id/btn_select_file"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="select file" />
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_select_file"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_file_name" />
 
     <Button
-        android:id="@+id/detect_lung"
+        android:id="@+id/btn_detect_lung"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="detection" />
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_detect_lung"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_select_file" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
