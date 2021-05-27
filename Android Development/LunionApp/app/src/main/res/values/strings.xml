@@ -1,11 +1,9 @@
 <resources>
-    <string name="app_name">LunionApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Lunion</string>
     <string name="nav_detect">Detect</string>
     <string name="nav_news">News</string>
     <string name="nav_air_quality">Air Quality</string>
-    <string name="detect_page_title">Lung Condition</string>
+    <string name="detect_page_title">Upload Lung Sound</string>
     <string name="btn_select_file">select file</string>
     <string name="btn_detect_lung">Detect lung</string>
     <string name="cd_lung">lung</string>
@@ -21,4 +19,12 @@
     <string name="text_number_aqi">120</string>
     <string name="text_type_aqi">VERY HIGH POLLUTION</string>
     <string name="text_update_time_ago">Update: 15 seconds ago</string>
+    <string name="cd_items_news">img news</string>
+    <string name="tv_title_news">Menangani penyakit asma</string>
+    <string name="tv_article_time">30 min ago</string>
+    <string name="tv_source">BBC News</string>
+    <string name="tv_news_content">lorem ipsum</string>
+    <string name="tv_result_page">Result</string>
+    <string name="tv_diagnose_result">Asthma Diagnose</string>
+    <string name="tv_detect_page">Upload lungs sound here so it can be predicted</string>
 </resources>
