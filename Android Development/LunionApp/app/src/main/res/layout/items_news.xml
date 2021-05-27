@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_news_title"
+            android:id="@+id/news_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -48,7 +48,7 @@
             tools:text="@string/tv_title_news" />
 
         <TextView
-            android:id="@+id/tv_news_date"
+            android:id="@+id/news_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -62,7 +62,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_poster"
-            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
+            app:layout_constraintTop_toBottomOf="@+id/news_title"
             tools:text="30 min ago" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

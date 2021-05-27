@@ -1,5 +1,6 @@
 package com.lunion.lunionapp.data.response
 
+
 data class Article(
     val author: String,
     val content: String,
