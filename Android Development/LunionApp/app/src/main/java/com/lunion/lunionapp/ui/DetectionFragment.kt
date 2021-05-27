@@ -1,4 +1,4 @@
-package com.lunion.lunionapp
+package com.lunion.lunionapp.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -24,7 +24,7 @@ class DetectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //select local file
-        viewBinding.selectFile.setOnClickListener {
+        viewBinding.btnSelectFile.setOnClickListener {
             var chooseFile = Intent(Intent.ACTION_GET_CONTENT)
             chooseFile.type = "*/*"
             chooseFile = Intent.createChooser(chooseFile, "Choose a file")
@@ -32,7 +32,7 @@ class DetectionFragment : Fragment() {
         }
 
         //detection n move resultDetectionActivity
-        viewBinding.detectLung.setOnClickListener {
+        viewBinding.btnDetectLung.setOnClickListener {
             val move = Intent(activity, ResultDetectionActivity::class.java)
             startActivity(move)
         }
@@ -42,7 +42,7 @@ class DetectionFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val uri: Uri? = data?.data
-        viewBinding.text.text = uri.toString()
+        viewBinding.tvFileName.text = uri.toString()
     }
 
     companion object {

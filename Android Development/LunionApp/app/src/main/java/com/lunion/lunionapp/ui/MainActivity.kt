@@ -1,9 +1,10 @@
-package com.lunion.lunionapp
+package com.lunion.lunionapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/nav_detection"
-        android:title="Detect"
+        android:title="@string/nav_detect"
         android:icon="@drawable/detect"/>
     <item
         android:id="@+id/nav_news"
-        android:title="News"
-        android:icon="@drawable/detect"/>
+        android:title="@string/nav_news"
+        android:icon="@drawable/article"/>
     <item
         android:id="@+id/nav_air_quality"
-        android:title="Air Quality"
-        android:icon="@drawable/detect"/>
+        android:title="@string/nav_air_quality"
+        android:icon="@drawable/air"/>
 
 </menu>

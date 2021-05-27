@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LunionApp">
-        <activity android:name=".DetailNewsActivity"></activity>
-        <activity android:name=".ResultDetectionActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.DetailNewsActivity"></activity>
+        <activity android:name=".ui.ResultDetectionActivity" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
