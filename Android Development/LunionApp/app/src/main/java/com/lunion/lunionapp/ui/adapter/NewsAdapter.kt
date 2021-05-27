@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.lunion.lunionapp.data.response.Article
 import com.lunion.lunionapp.databinding.ItemsNewsBinding
 
@@ -41,7 +40,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {
         fun bind(news: Article) {
             with(binding){
                 Glide.with(itemView.context)
-                    .load(news.urlToImage).apply(RequestOptions().override(130,165))
+                    .load(news.urlToImage)
                     .centerCrop()
                     .into(imgPoster)
                 newsTitle.text = news.title

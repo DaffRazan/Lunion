@@ -43,10 +43,12 @@ class NewsFragment : Fragment() {
     }
 
     private fun showRecyclerView() {
+        checkIsLoading(true)
         binding.rvNews.layoutManager = LinearLayoutManager(context)
         val adapter = NewsAdapter()
         viewModel.news.observe(viewLifecycleOwner,{
             adapter.setNews(it)
+            checkIsLoading(false)
         })
         binding.rvNews.adapter = adapter
 
@@ -61,6 +63,14 @@ class NewsFragment : Fragment() {
     private fun selectedNews(data: Article){
         val moveDetail = Intent(context, DetailNewsActivity::class.java)
         startActivity(moveDetail)
+    }
+
+    private fun checkIsLoading(data: Boolean) {
+        if (data){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.INVISIBLE
+        }
     }
 
 }
