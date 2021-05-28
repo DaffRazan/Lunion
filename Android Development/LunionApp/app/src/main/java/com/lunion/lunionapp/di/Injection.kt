@@ -6,7 +6,7 @@ import com.lunion.lunionapp.data.retrofit.ApiConfig
 object Injection {
 
     fun provideRepository(): LunionRepository{
-        return LunionRepository.getInstance(ApiConfig.make())
+        return LunionRepository.getInstance(ApiConfig.make(), ApiConfig.makeAirQuality())
     }
 
 }

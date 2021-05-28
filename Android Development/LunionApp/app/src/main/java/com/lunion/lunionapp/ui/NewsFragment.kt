@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lunion.lunionapp.data.response.Article
-import com.lunion.lunionapp.data.response.Source
+import com.lunion.lunionapp.data.response.news.Article
 import com.lunion.lunionapp.databinding.FragmentNewsBinding
-import com.lunion.lunionapp.model.NewsModel
 import com.lunion.lunionapp.ui.adapter.NewsAdapter
 import com.lunion.lunionapp.utils.DataMapper
 import com.lunion.lunionapp.viewmodel.NewsViewModel

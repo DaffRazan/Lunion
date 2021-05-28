@@ -16,5 +16,14 @@ object ApiConfig {
         return retrofit.create(ApiService::class.java)
     }
 
+    fun makeAirQuality(): ApiServiceAirQuality {
+        val retrofit = Retrofit.Builder()
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.weatherbit.io/v2.0/")
+            .build()
+        return retrofit.create(ApiServiceAirQuality::class.java)
+    }
+
 
 }

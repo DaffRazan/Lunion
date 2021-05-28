@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.lunion.lunionapp.data.response.Article
+import com.lunion.lunionapp.data.response.news.Article
 import com.lunion.lunionapp.databinding.ItemsNewsBinding
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ListViewHolder>() {

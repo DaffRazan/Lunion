@@ -1,4 +1,4 @@
-package com.lunion.lunionapp.data.response
+package com.lunion.lunionapp.data.response.news
 
 data class Source(
     val id: String,

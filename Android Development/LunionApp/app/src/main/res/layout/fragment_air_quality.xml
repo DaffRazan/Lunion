@@ -51,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:gravity="center"
         android:text="@string/text_type_aqi"
         android:textSize="24sp"
@@ -62,6 +64,8 @@
         android:id="@+id/result_number_aqi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:text="@string/text_number_aqi"
@@ -86,6 +90,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:text="Banda aceh"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,8 +106,19 @@
         android:gravity="center"
         android:text="lat: 0342, Lon: 0342"
         android:textSize="14sp"
+        android:visibility="invisible"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

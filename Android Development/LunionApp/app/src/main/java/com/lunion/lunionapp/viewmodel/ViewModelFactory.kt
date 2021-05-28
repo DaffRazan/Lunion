@@ -22,6 +22,9 @@ class ViewModelFactory private constructor(private val repository: LunionReposit
             modelClass.isAssignableFrom(NewsViewModel::class.java)->{
                 NewsViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(AirQualityViewModel::class.java)->{
+                AirQualityViewModel(repository) as T
+            }
             else -> throw Throwable("UnKnow ViewModel class: " + modelClass.name)
         }
     }

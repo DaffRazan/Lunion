@@ -3,6 +3,7 @@ package com.lunion.lunionapp.ui
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -15,14 +16,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
 import com.lunion.lunionapp.databinding.FragmentAirQualityBinding
+import com.lunion.lunionapp.viewmodel.AirQualityViewModel
+import com.lunion.lunionapp.viewmodel.ViewModelFactory
 import java.util.*
 
 class AirQualityFragment : Fragment() {
 
     private lateinit var binding: FragmentAirQualityBinding
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var viewModel: AirQualityViewModel
     private val permissionId = 1010
 
     override fun onCreateView(
@@ -36,15 +41,28 @@ class AirQualityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //loader
+        checkIsLoading(false)
+
+        //viewModel
+        val factory = ViewModelFactory.getInstance()
+        viewModel = ViewModelProvider(this, factory)[AirQualityViewModel::class.java]
+
+        //observeLiveData
+        viewModel.airQuality.observe(viewLifecycleOwner,{
+            binding.resultNumberAqi.text = it.aqi.toString()
+            binding.resultTypeAqi.text = rangeAqi(it.aqi)
+            showVisibilityAirQuality()
+            checkIsLoading(false)
+        })
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         Log.d("Debug:","Hallo")
         binding.btnScan.setOnClickListener {
+            checkIsLoading(true)
             Log.d("Debug:","cek "+checkPermission().toString())
             Log.d("Debug:", "cek " + isLocationEnabled().toString())
             requestPermission()
-            /* fusedLocationProviderClient.lastLocation.addOnSuccessListener{location: Location? ->
-                 textView.text = location?.latitude.toString() + "," + location?.longitude.toString()
-             }*/
             getLastLocation()
         }
     }
@@ -92,11 +110,12 @@ class AirQualityFragment : Fragment() {
                             Log.d("Debug:" ,"Your Location:"+ location.longitude)
                             binding.location.text = getCityName(location.latitude,location.longitude)
                             binding.latLon.text = "Lat: ${location.latitude} Lon: ${location.longitude}"
+                            viewModel.getAirQuality(location.latitude, location.longitude)
                         }
                     }
-
             }else{
                 Toast.makeText(requireContext(),"Please Turn on Your device Location", Toast.LENGTH_SHORT).show()
+                checkIsLoading(false)
             }
         }else{
             requestPermission()
@@ -127,6 +146,7 @@ class AirQualityFragment : Fragment() {
             Log.d("Debug:","your last last location: "+ lastLocation.longitude.toString())
             binding.location.text = getCityName(lastLocation.latitude,lastLocation.longitude)
             binding.latLon.text = "Lat: ${lastLocation.latitude} Lon: ${lastLocation.longitude}"
+            viewModel.getAirQuality(lastLocation.latitude, lastLocation.longitude)
         }
     }
 
@@ -136,13 +156,50 @@ class AirQualityFragment : Fragment() {
         val countryName: String
         val geoCoder = Geocoder(requireContext(), Locale.getDefault())
         val address = geoCoder.getFromLocation(lat,long,3)
-
         cityName = address[0].locality
         countryName = address[0].countryName
         Log.d("Debug:", "Your City: $cityName ; your Country $countryName")
         return cityName
     }
 
+    private fun checkIsLoading(data: Boolean) {
+        if (data){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.INVISIBLE
+        }
+    }
 
+    private fun showVisibilityAirQuality(){
+        binding.resultNumberAqi.visibility = View.VISIBLE
+        binding.resultTypeAqi.visibility = View.VISIBLE
+        binding.location.visibility = View.VISIBLE
+        binding.latLon.visibility = View.VISIBLE
+    }
+
+    private fun rangeAqi(aqi: Int): String{
+        when {
+            aqi<=50 -> {
+                return "HEALTHY AIR"
+            }
+            aqi<=100 -> {
+                return "MODERATE AIR"
+            }
+            aqi<=150 -> {
+                return "BAD FOR VULNERABLE PEOPLE"
+            }
+            aqi<=200 -> {
+                return "AIR IS NOT HEALTHY"
+            }
+            aqi<=250 -> {
+                return "AIR IS VERY UNHEALTHY"
+            }
+            aqi<=300 -> {
+                return "HAZARDOUS AIR"
+            }else ->{
+                return "CAN'T DETECT"
+            }
+        }
+    }
 
 }

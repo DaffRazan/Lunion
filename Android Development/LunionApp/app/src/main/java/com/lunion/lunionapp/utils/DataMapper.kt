@@ -1,6 +1,6 @@
 package com.lunion.lunionapp.utils
 
-import com.lunion.lunionapp.data.response.Article
+import com.lunion.lunionapp.data.response.news.Article
 import com.lunion.lunionapp.model.NewsModel
 
 object DataMapper{
