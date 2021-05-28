@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lunion.lunionapp.data.response.Article
 import com.lunion.lunionapp.data.response.Source
 import com.lunion.lunionapp.databinding.FragmentNewsBinding
+import com.lunion.lunionapp.model.NewsModel
 import com.lunion.lunionapp.ui.adapter.NewsAdapter
+import com.lunion.lunionapp.utils.DataMapper
 import com.lunion.lunionapp.viewmodel.NewsViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
 
@@ -62,6 +64,7 @@ class NewsFragment : Fragment() {
 
     private fun selectedNews(data: Article){
         val moveDetail = Intent(context, DetailNewsActivity::class.java)
+        moveDetail.putExtra("data", DataMapper.mapArticleToNewsModel(data))
         startActivity(moveDetail)
     }
 
