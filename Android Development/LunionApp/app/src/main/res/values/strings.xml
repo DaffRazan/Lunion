@@ -16,7 +16,7 @@
     <string name="text_air_page2">Get recent air quality index by your recent location</string>
     <string name="text_btn_scan">Scan</string>
     <string name="cd_aq">img air</string>
-    <string name="text_number_aqi">120</string>
+    <string name="text_number_aqi">0</string>
     <string name="text_type_aqi">VERY HIGH POLLUTION</string>
     <string name="text_update_time_ago">Update: 15 seconds ago</string>
     <string name="cd_items_news">img news</string>
