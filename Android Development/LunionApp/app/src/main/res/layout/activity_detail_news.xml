@@ -1,75 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DetailNewsActivity">
-
-    <ImageView
-        android:id="@+id/img_news_article"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/lungs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_news_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/search_shape"
-        android:fontFamily="@font/poppins_bold"
-        android:padding="10dp"
-        android:text="@string/tv_article_time"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_news_article" />
-
-    <TextView
-        android:id="@+id/tv_news_source"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/search_shape"
-        android:fontFamily="@font/poppins_bold"
-        android:padding="10dp"
-        android:text="@string/tv_source"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/tv_news_time"
-        app:layout_constraintTop_toBottomOf="@+id/img_news_article" />
-
-    <TextView
-        android:id="@+id/tv_news_title"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/tv_source"
-        android:textColor="@color/primary_color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_news_source" />
+        tools:context=".ui.DetailNewsActivity">
 
-    <TextView
-        android:id="@+id/tv_news_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="@string/tv_news_content"
-        android:textColor="@color/primary_color"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_news_title" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img_news_article"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/lungs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cd_img_detail_news" />
+
+        <TextView
+            android:id="@+id/tv_news_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/search_shape"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="10dp"
+            android:text="@string/tv_article_time"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_news_article" />
+
+        <TextView
+            android:id="@+id/tv_news_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/search_shape"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="10dp"
+            android:text="@string/tv_source"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/tv_news_time"
+            app:layout_constraintTop_toBottomOf="@+id/img_news_article" />
+
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/tv_source"
+            android:textColor="@color/primary_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_source" />
+
+        <TextView
+            android:id="@+id/tv_news_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/tv_news_content"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
