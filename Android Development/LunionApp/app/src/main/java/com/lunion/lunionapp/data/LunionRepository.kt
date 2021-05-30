@@ -2,6 +2,8 @@ package com.lunion.lunionapp.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.lunion.lunionapp.BuildConfig.API_KEY_AQI
+import com.lunion.lunionapp.BuildConfig.API_KEY_NEWS
 import com.lunion.lunionapp.data.response.air.AirQualityResponse
 import com.lunion.lunionapp.data.response.air.Data
 import com.lunion.lunionapp.data.response.news.Article
@@ -27,7 +29,7 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
     val airQuality = MutableLiveData<Data>()
 
     fun getAllNews(){
-        apiRequest.getAllNews("lung", "en", "883b0d47be8b4a439a13f94720316683")
+        apiRequest.getAllNews("lung", "en", API_KEY_NEWS)
             .enqueue(object : Callback<NewsResponse>{
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -44,7 +46,7 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
     }
 
     fun getAirQuality(lat: Double, lon: Double){
-        apiRequestAirQuality.getAirQuality(lat, lon, "eddd57c23f2e43918b81404fc95a9cec")
+        apiRequestAirQuality.getAirQuality(lat, lon, API_KEY_AQI)
             .enqueue(object : Callback<AirQualityResponse>{
                 override fun onResponse(
                     call: Call<AirQualityResponse>,
