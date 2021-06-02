@@ -6,6 +6,10 @@
         android:title="@string/nav_detect"
         android:icon="@drawable/detect"/>
     <item
+        android:id="@+id/nav_history"
+        android:title="@string/history"
+        android:icon="@drawable/history_icon"/>
+    <item
         android:id="@+id/nav_news"
         android:title="@string/nav_news"
         android:icon="@drawable/article"/>
