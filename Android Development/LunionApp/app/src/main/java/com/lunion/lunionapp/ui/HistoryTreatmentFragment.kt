@@ -40,7 +40,10 @@ class HistoryTreatmentFragment : Fragment() {
         //viewModel
         val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[HistoryTreatmentViewModel::class.java]
-        viewModel.getAllTreatment(FirebaseAuth.getInstance().currentUser?.uid.toString(), typeUser.toString())
+        viewModel.getAllTreatment(
+            FirebaseAuth.getInstance().currentUser?.uid.toString(),
+            typeUser.toString()
+        )
 
         //recyclerView
         viewBinding.rvTreatment.setHasFixedSize(true)
@@ -54,10 +57,11 @@ class HistoryTreatmentFragment : Fragment() {
         viewBinding.rvTreatment.layoutManager = LinearLayoutManager(context)
         val adapter = TreatmentAdapter()
         viewModel.dataTreatment.observe(viewLifecycleOwner, {
-            if (it == null){
-                viewBinding.noData.visibility = View.VISIBLE
-            }else{
-                adapter.setNews(it.reversed())
+            if (it == null) {
+                viewBinding.lottieNoData.visibility = View.VISIBLE
+                viewBinding.textNoData.visibility = View.VISIBLE
+            } else {
+                adapter.setTreatment(it)
             }
             checkIsLoading(false)
         })
@@ -80,6 +84,4 @@ class HistoryTreatmentFragment : Fragment() {
             return fragment
         }
     }
-
-
 }

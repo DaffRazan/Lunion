@@ -16,12 +16,14 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: LoginRegisterViewModel
-    private lateinit var progrssDialog: ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         //viewModel
         val factory = ViewModelFactory.getInstance()
@@ -39,19 +41,19 @@ class RegisterActivity : AppCompatActivity() {
 
         //show status register
         viewModel.registerSuccess.observe(this, {
-            if (it.status == true){
+            if (it.status == true) {
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                progrssDialog.dismiss()
-                viewModel.typeUser.observe(this, {typeUser ->
+                progressDialog.dismiss()
+                viewModel.typeUser.observe(this, { typeUser ->
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("DATA", typeUser)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
                 })
-            }else if(it.status == false){
+            } else if (it.status == false) {
                 Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_LONG).show()
-                progrssDialog.dismiss()
+                progressDialog.dismiss()
             }
         })
     }
@@ -65,37 +67,37 @@ class RegisterActivity : AppCompatActivity() {
         when {
             TextUtils.isEmpty((fullName)) -> Toast.makeText(
                 this,
-                "Fullname is required",
+                getString(R.string.text_fullname_required),
                 Toast.LENGTH_LONG
             ).show()
             TextUtils.isEmpty((email)) -> Toast.makeText(
                 this,
-                "email is required",
+                getString(R.string.text_email_required),
                 Toast.LENGTH_LONG
             ).show()
             TextUtils.isEmpty((password)) -> Toast.makeText(
                 this,
-                "password is required",
+                getString(R.string.text_password_required),
                 Toast.LENGTH_LONG
-             ).show()
+            ).show()
 
             else -> {
-                progrssDialog = ProgressDialog(this)
-                progrssDialog.setTitle("SignUp")
-                progrssDialog.setMessage("Please wait, thhis may take a whhile...")
-                progrssDialog.setCanceledOnTouchOutside(false)
-                progrssDialog.show()
+                progressDialog = ProgressDialog(this)
+                progressDialog.setTitle("Sign Up")
+                progressDialog.setMessage(getString(R.string.text_load_register))
+                progressDialog.setCanceledOnTouchOutside(false)
+                progressDialog.show()
                 viewModel.registerToApp(fullName, email, password, type)
             }
         }
     }
 
-    private fun checkRadio(): String{
-        return when (binding.radioGroup.checkedRadioButtonId){
-            R.id.pasien -> {
+    private fun checkRadio(): String {
+        return when (binding.radioGroup.checkedRadioButtonId) {
+            R.id.patient -> {
                 "patient"
             }
-            R.id.doter -> {
+            R.id.doctor -> {
                 "doctor"
             }
             else -> {

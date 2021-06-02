@@ -2,9 +2,9 @@ package com.lunion.lunionapp.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.ActivityMainBinding
 
@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         //default select fragment
         if (typeUser.equals("patient")){
-            viewBinding.bottomNavigationView.menu.removeItem(R.id.nav_detection);
+            viewBinding.bottomNavigationView.menu.removeItem(R.id.nav_detection)
             val fragment = HistoryTreatmentFragment.newInstance()
             addFragment(fragment)
-        }else{
+        } else {
             val fragment = DetectionFragment.newInstance()
             addFragment(fragment)
         }
@@ -61,6 +61,11 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.layout_container, fragment, fragment.javaClass.simpleName)
             .commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 }

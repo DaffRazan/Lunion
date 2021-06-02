@@ -17,6 +17,7 @@ import com.lunion.lunionapp.data.retrofit.ApiServiceAirQuality
 import com.lunion.lunionapp.model.StatusProses
 import com.lunion.lunionapp.model.TreatmentModel
 import com.lunion.lunionapp.model.UserModel
+import com.lunion.lunionapp.utils.Constants.BUCKET_LINK
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,14 +25,20 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-class LunionRepository(private val apiRequest: ApiService, private val apiRequestAirQuality: ApiServiceAirQuality) {
+class LunionRepository(
+    private val apiRequest: ApiService,
+    private val apiRequestAirQuality: ApiServiceAirQuality
+) {
 
-    companion object{
+    companion object {
         @Volatile
         private var instance: LunionRepository? = null
-        fun getInstance(apiRequest: ApiService, apiRequestAirQuality: ApiServiceAirQuality): LunionRepository =
-            instance ?: synchronized(this){
-                instance?: LunionRepository(apiRequest, apiRequestAirQuality)
+        fun getInstance(
+            apiRequest: ApiService,
+            apiRequestAirQuality: ApiServiceAirQuality
+        ): LunionRepository =
+            instance ?: synchronized(this) {
+                instance ?: LunionRepository(apiRequest, apiRequestAirQuality)
             }
     }
 
@@ -43,9 +50,9 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
     val saveDataTreatment = MutableLiveData<StatusProses>()
     val dataTreatment = MutableLiveData<List<TreatmentModel>>()
 
-    fun getAllNews(){
+    fun getAllNews() {
         apiRequest.getAllNews("lung", "en", API_KEY_NEWS)
-            .enqueue(object : Callback<NewsResponse>{
+            .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
                     response: Response<NewsResponse>
@@ -60,9 +67,9 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
             })
     }
 
-    fun getAirQuality(lat: Double, lon: Double){
+    fun getAirQuality(lat: Double, lon: Double) {
         apiRequestAirQuality.getAirQuality(lat, lon, API_KEY_AQI)
-            .enqueue(object : Callback<AirQualityResponse>{
+            .enqueue(object : Callback<AirQualityResponse> {
                 override fun onResponse(
                     call: Call<AirQualityResponse>,
                     response: Response<AirQualityResponse>
@@ -77,15 +84,14 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
             })
     }
 
-    fun loginToApp(email: String, password: String){
+    fun loginToApp(email: String, password: String) {
         val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { taskId ->
-            if (taskId.isSuccessful){
+            if (taskId.isSuccessful) {
                 getUserInfo()
                 registerSuccess.postValue(StatusProses(true, "Login Success"))
-            }
-            else{
+            } else {
                 val message = taskId.exception?.localizedMessage.toString()
                 registerSuccess.postValue(
                     StatusProses(
@@ -100,8 +106,9 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
     }
 
     fun getUserInfo() {
-        val userRef = FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Users").child(FirebaseAuth.getInstance().currentUser?.uid.toString())
-        userRef.addValueEventListener(object : ValueEventListener{
+        val userRef = FirebaseDatabase.getInstance(BUCKET_LINK).reference.child("Users")
+            .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val data = snapshot.getValue(UserModel::class.java)
                 typeUser.postValue(data?.type)
@@ -115,14 +122,13 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
         })
     }
 
-    fun registerToApp(fullName: String, email: String, password: String, type: String){
+    fun registerToApp(fullName: String, email: String, password: String, type: String) {
         val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { taskId ->
-                if (taskId.isSuccessful){
+                if (taskId.isSuccessful) {
                     saveUserInfo(fullName, email, type)
-                }
-                else{
+                } else {
                     val message = taskId.exception?.localizedMessage.toString()
                     registerSuccess.postValue(
                         StatusProses(
@@ -137,7 +143,8 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
 
     private fun saveUserInfo(fullName: String, email: String, type: String) {
         val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
-        val userRef: DatabaseReference = FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Users")
+        val userRef: DatabaseReference =
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child("Users")
 
         val userMap = HashMap<String, Any>()
         userMap["uid"] = currentUserId
@@ -147,10 +154,10 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
 
         userRef.child(currentUserId).setValue(userMap)
             .addOnCompleteListener { taskId ->
-                if (taskId.isSuccessful){
+                if (taskId.isSuccessful) {
                     typeUser.postValue(type)
                     registerSuccess.postValue(StatusProses(true, "Account has been created"))
-                }else{
+                } else {
                     val message = taskId.exception!!.toString()
                     registerSuccess.postValue(
                         StatusProses(
@@ -163,32 +170,40 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
             }
     }
 
-    fun checkEmailPatien(email: String){
+    fun checkEmailPatient(email: String) {
         //check email patient exists
-        val reff = FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Users")
+        val reff =
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
+                "Users"
+            )
         reff.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 var i = false
                 snapshot.children.forEach { data ->
-                    if (data.child("email").getValue(String::class.java).equals(email)){
+                    if (data.child("email").getValue(String::class.java).equals(email)) {
                         dataUser.postValue(data.getValue(UserModel::class.java))
                         i = true
-                    }else{
-                        if (!i){
+                    } else {
+                        if (!i) {
                             dataUser.postValue(null)
                         }
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun saveDataTreatment(diagnose: String, note: String, user: UserModel, dataDoctor: UserModel){
+    fun saveDataTreatment(diagnose: String, note: String, user: UserModel, dataDoctor: UserModel) {
         val treatmentMap = HashMap<String, Any>()
-        val reff = FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Treatment").child("Patients").child(
-            user.uid.toString()).child("History")
+        val reff =
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
+                "Treatment"
+            ).child("Patients").child(
+                user.uid.toString()
+            ).child("History")
         val treatmentId = reff.push().key.toString()
         treatmentMap["treatmentId"] = treatmentId
         treatmentMap["patientId"] = user.uid.toString()
@@ -196,21 +211,24 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
         treatmentMap["note"] = note
         treatmentMap["doctorId"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
         treatmentMap["date"] = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE).toString()
-        treatmentMap["namePatient"] =  user.fullname.toString()
+        treatmentMap["namePatient"] = user.fullname.toString()
         treatmentMap["nameDoctor"] = dataDoctor.fullname.toString()
 
-
-            reff.child(treatmentId).updateChildren(treatmentMap)
+        reff.child(treatmentId).updateChildren(treatmentMap)
 
         val treatmentMap2 = HashMap<String, Any>()
-        val reff2 = FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Treatment").child("Doctor").child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child("History")
+        val reff2 =
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
+                "Treatment"
+            ).child("Doctor").child(FirebaseAuth.getInstance().currentUser?.uid.toString())
+                .child("History")
         treatmentMap2["treatmentId"] = treatmentId
         treatmentMap2["patientId"] = user.uid.toString()
         treatmentMap2["diagnose"] = diagnose
         treatmentMap2["note"] = note
         treatmentMap2["doctorId"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
         treatmentMap2["date"] = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE).toString()
-        treatmentMap2["namePatient"] =  user.fullname.toString()
+        treatmentMap2["namePatient"] = user.fullname.toString()
         treatmentMap2["nameDoctor"] = dataDoctor.fullname.toString()
 
         reff2.child(treatmentId).updateChildren(treatmentMap2)
@@ -219,29 +237,32 @@ class LunionRepository(private val apiRequest: ApiService, private val apiReques
 
     }
 
-    fun getAllTreatment(userId: String, type: String){
+    fun getAllTreatment(userId: String, type: String) {
         //check email patient exists
-        val reff: DatabaseReference = if (type == "doctor"){
-            FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Treatment").child("Doctor").child(userId).child("History")
-        }else{
-            FirebaseDatabase.getInstance("https://lunionapp-d480e-default-rtdb.asia-southeast1.firebasedatabase.app").reference.child("Treatment").child("Patients").child(userId).child("History")
+        val reff: DatabaseReference = if (type == "doctor") {
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
+                "Treatment"
+            ).child("Doctor").child(userId).child("History")
+        } else {
+            FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
+                "Treatment"
+            ).child("Patients").child(userId).child("History")
         }
         reff.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     val listData = ArrayList<TreatmentModel>()
                     snapshot.children.forEach { data ->
                         data.getValue(TreatmentModel::class.java)?.let { listData.add(it) }
                     }
                     dataTreatment.postValue(listData)
-                }else{
+                } else {
                     dataTreatment.postValue(null)
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
 }
-
-

@@ -1,12 +1,9 @@
 package com.lunion.lunionapp.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.UserManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.ActivityResultDetectionBinding
 import com.lunion.lunionapp.model.UserModel
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
@@ -19,6 +16,8 @@ class ResultDetectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         //viewModel
         val factory = ViewModelFactory.getInstance()

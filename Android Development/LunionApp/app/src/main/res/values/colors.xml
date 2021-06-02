@@ -12,5 +12,9 @@
     <color name="secondary_color">#23049D</color>
     <color name="background_main">#f9fcfb</color>
     <color name="nav_active">#440a67</color>
-    =
+    <color name="color_has_account">#C1CAFD</color>
+    <color name="button_login_register">#4D298E</color>
+    <color name="danger_air">#bf1363</color>
+    <color name="warning_air">#fb9300</color>
+    <color name="healthy_air">#39a6a3</color>
 </resources>

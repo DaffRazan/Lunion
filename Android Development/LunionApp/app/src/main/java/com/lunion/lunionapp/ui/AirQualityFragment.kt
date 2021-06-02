@@ -3,7 +3,6 @@ package com.lunion.lunionapp.ui
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -15,9 +14,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.*
+import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.FragmentAirQualityBinding
 import com.lunion.lunionapp.viewmodel.AirQualityViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
@@ -52,6 +54,25 @@ class AirQualityFragment : Fragment() {
         viewModel.airQuality.observe(viewLifecycleOwner, {
             binding.resultNumberAqi.text = it.aqi.toString()
             binding.resultTypeAqi.text = rangeAqi(it.aqi)
+
+            when {
+                it.aqi >= 151 -> {
+                    // danger air
+                    binding.resultNumberAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.danger_air))
+                    binding.resultTypeAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.danger_air))
+                }
+                it.aqi in 51..150 -> {
+                    // warning air
+                    binding.resultNumberAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.warning_air))
+                    binding.resultTypeAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.warning_air))
+                }
+                else -> {
+                    // healthy air
+                    binding.resultNumberAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.healthy_air))
+                    binding.resultTypeAqi.setTextColor(ContextCompat.getColor(requireContext(),R.color.healthy_air))
+                }
+            }
+
             showVisibilityAirQuality()
             checkIsLoading(false)
         })
@@ -65,6 +86,30 @@ class AirQualityFragment : Fragment() {
             Log.d("Debug:", "cek " + isLocationEnabled().toString())
             requestPermission()
             getLastLocation()
+        }
+    }
+
+    private fun rangeAqi(aqi: Int): String {
+        when {
+            aqi <= 50 -> {
+                return "HEALTHY AIR"
+            }
+            aqi <= 100 -> {
+                return "MODERATE AIR"
+            }
+            aqi <= 150 -> {
+                return "BAD FOR VULNERABLE PEOPLE"
+            }
+            aqi <= 200 -> {
+                return "AIR IS NOT HEALTHY"
+            }
+            aqi <= 250 -> {
+                return "AIR IS VERY UNHEALTHY"
+            }
+            aqi <= 300 -> {
+                return "HAZARDOUS AIR"
+            }
+            else -> return "Unable To Detect now..."
         }
     }
 
@@ -129,7 +174,7 @@ class AirQualityFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Please Turn on Your device Location",
+                    getString(R.string.text_enable_notif_permission),
                     Toast.LENGTH_SHORT
                 ).show()
                 checkIsLoading(false)
@@ -198,34 +243,10 @@ class AirQualityFragment : Fragment() {
     private fun showVisibilityAirQuality() {
         binding.resultNumberAqi.visibility = View.VISIBLE
         binding.resultTypeAqi.visibility = View.VISIBLE
+        binding.imgAirQuality.visibility = View.VISIBLE
         binding.location.visibility = View.VISIBLE
         binding.latLon.visibility = View.VISIBLE
-    }
-
-    private fun rangeAqi(aqi: Int): String {
-        when {
-            aqi <= 50 -> {
-                return "HEALTHY AIR"
-            }
-            aqi <= 100 -> {
-                return "MODERATE AIR"
-            }
-            aqi <= 150 -> {
-                return "BAD FOR VULNERABLE PEOPLE"
-            }
-            aqi <= 200 -> {
-                return "AIR IS NOT HEALTHY"
-            }
-            aqi <= 250 -> {
-                return "AIR IS VERY UNHEALTHY"
-            }
-            aqi <= 300 -> {
-                return "HAZARDOUS AIR"
-            }
-            else -> {
-                return "CAN'T DETECT"
-            }
-        }
+        binding.lottieAqi.visibility = View.INVISIBLE
     }
 
 }

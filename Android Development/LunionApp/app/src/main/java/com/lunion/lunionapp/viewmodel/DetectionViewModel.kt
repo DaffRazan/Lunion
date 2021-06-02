@@ -17,7 +17,7 @@ class DetectionViewModel(private val repository: LunionRepository): ViewModel() 
         this.saveDataTreatment = repository.saveDataTreatment
     }
 
-    fun checkEmailPatient(email: String) = repository.checkEmailPatien(email)
+    fun checkEmailPatient(email: String) = repository.checkEmailPatient(email)
 
     fun getUserInfo() = repository.getUserInfo()
 
