@@ -32,4 +32,29 @@
     <string name="text_loc">Banda aceh</string>
     <string name="splash_text1">Love your lung</string>
     <string name="splash_text2">Anywhere, Anytime</string>
+    <string name="doctor_nurse">Doctor/Nurse</string>
+    <string name="register">Register</string>
+    <string name="name">FullName</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_account_yet_register_here">Don;t have account yet?, Register here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_patient">Email Patient..</string>
+    <string name="add_note_treatment">Add note Treatment...</string>
+    <string name="submit">Submit</string>
+    <string name="andi_s_lung">Andi\'s Lung</string>
+    <string name="history">History</string>
+    <string name="list_history_treatment_will_display_here">list history treatment will display here</string>
+    <string name="doctor">Doctor :</string>
+    <string name="lorem_inpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="there_is_no_history_of_treatment">There is no history of treatment..</string>
+    <string name="patient">Patient</string>
+    <string name="khairul">Khairul</string>
+    <string name="patient2">Patient :</string>
+    <string name="welcome_to_lunion">Welcome to Lunion!</string>
+    <string name="app_where_you_can_monitor_your_lung_s_health">App where you can monitor your lung health</string>
+    <string name="logo">Logo</string>
+    <string name="already_have_account_login_here">Already have account?, Login here..!</string>
 </resources>

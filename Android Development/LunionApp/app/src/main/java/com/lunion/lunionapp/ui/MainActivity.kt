@@ -1,7 +1,8 @@
 package com.lunion.lunionapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.lunion.lunionapp.R
@@ -14,32 +15,45 @@ class MainActivity : AppCompatActivity() {
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener(onNavSelect)
+        //type user
+        val typeUser = intent.getStringExtra("DATA")
+        Log.d("dataku", "Data: $typeUser")
 
         //default select fragment
-        val fragment = DetectionFragment.newInstance()
-        addFragment(fragment)
-    }
-
-    private val onNavSelect = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.nav_detection -> {
-                val fragment = DetectionFragment.newInstance()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_news -> {
-                val fragment = NewsFragment()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_air_quality -> {
-                val fragment = AirQualityFragment()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
+        if (typeUser.equals("patient")){
+            viewBinding.bottomNavigationView.menu.removeItem(R.id.nav_detection);
+            val fragment = HistoryTreatmentFragment.newInstance()
+            addFragment(fragment)
+        }else{
+            val fragment = DetectionFragment.newInstance()
+            addFragment(fragment)
         }
-        false
+
+        viewBinding.bottomNavigationView.setOnNavigationItemSelectedListener{
+            when (it.itemId) {
+                R.id.nav_detection -> {
+                    val fragment = DetectionFragment.newInstance()
+                    addFragment(fragment)
+                }
+                R.id.nav_history -> {
+                    val bundle = Bundle()
+                    bundle.putString("DATA", typeUser.toString())
+                    val fragment = HistoryTreatmentFragment()
+                    fragment.arguments = bundle
+                    addFragment(fragment)
+                }
+                R.id.nav_news -> {
+                    val fragment = NewsFragment()
+                    addFragment(fragment)
+                }
+                R.id.nav_air_quality -> {
+                    val fragment = AirQualityFragment()
+                    addFragment(fragment)
+                }
+            }
+            false
+        }
+
     }
 
     private fun addFragment(fragment: Fragment) {
