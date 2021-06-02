@@ -10,7 +10,7 @@ class TreatmentAdapter: RecyclerView.Adapter<TreatmentAdapter.ListViewHolder>() 
 
     private var listTreatment = ArrayList<TreatmentModel>()
 
-    fun setNews(data: List<TreatmentModel>){
+    fun setTreatment(data: List<TreatmentModel>){
         this.listTreatment = data as ArrayList<TreatmentModel>
         notifyDataSetChanged()
     }

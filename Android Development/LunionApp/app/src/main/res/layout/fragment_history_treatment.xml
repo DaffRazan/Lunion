@@ -11,13 +11,12 @@
         android:id="@+id/detect_page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="History Treatment"
+        android:text="@string/text_treatment_page_title"
         android:textColor="@color/primary_color"
-        android:layout_marginTop="10dp"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,12 +24,14 @@
         android:id="@+id/tv_detect_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="@string/list_history_treatment_will_display_here"
+        android:text="@string/text_header_treatment"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/detect_page_title"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detect_page_title" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -38,22 +39,36 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detect_title"
-        tools:layout_editor_absoluteX="0dp"
-        tools:listitem="@layout/items_treatment" />
-
-    <TextView
-        android:id="@+id/no_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/there_is_no_history_of_treatment"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detect_title"
+        tools:listitem="@layout/items_treatment" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_no_data"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="invisible"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="no_data.json"
+        app:lottie_loop="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/there_is_no_history_of_treatment"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lottie_no_data" />
 
     <ProgressBar
         android:id="@+id/progressBar"
