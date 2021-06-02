@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13816577806",
+    "project_id": "lunionapp-d480e",
+    "storage_bucket": "lunionapp-d480e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13816577806:android:89d769deae2b79fbac215f",
+        "android_client_info": {
+          "package_name": "com.lunion.lunionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13816577806-8k13eqilp49i82jk35g7i060krft0lc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEGxQ6-Y-BO7SLJs7OZPec7LQ34Dfa6Ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13816577806-8k13eqilp49i82jk35g7i060krft0lc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
