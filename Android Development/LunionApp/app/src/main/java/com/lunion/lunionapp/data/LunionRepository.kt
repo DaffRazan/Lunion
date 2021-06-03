@@ -8,12 +8,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.lunion.lunionapp.BuildConfig.API_KEY_AQI
 import com.lunion.lunionapp.BuildConfig.API_KEY_NEWS
+import com.lunion.lunionapp.data.response.prediction.PredictionResponse
 import com.lunion.lunionapp.data.response.air.AirQualityResponse
 import com.lunion.lunionapp.data.response.air.Data
 import com.lunion.lunionapp.data.response.news.Article
 import com.lunion.lunionapp.data.response.news.NewsResponse
+import com.lunion.lunionapp.data.response.prediction.Prediction
 import com.lunion.lunionapp.data.retrofit.ApiService
 import com.lunion.lunionapp.data.retrofit.ApiServiceAirQuality
+import com.lunion.lunionapp.data.retrofit.ApiServicePredict
+import com.lunion.lunionapp.model.PredictionModel
 import com.lunion.lunionapp.model.StatusProses
 import com.lunion.lunionapp.model.TreatmentModel
 import com.lunion.lunionapp.model.UserModel
@@ -24,10 +28,10 @@ import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
 class LunionRepository(
     private val apiRequest: ApiService,
-    private val apiRequestAirQuality: ApiServiceAirQuality
+    private val apiRequestAirQuality: ApiServiceAirQuality,
+    private val apiRequestPredict: ApiServicePredict
 ) {
 
     companion object {
@@ -35,20 +39,39 @@ class LunionRepository(
         private var instance: LunionRepository? = null
         fun getInstance(
             apiRequest: ApiService,
-            apiRequestAirQuality: ApiServiceAirQuality
+            apiRequestAirQuality: ApiServiceAirQuality,
+            apiRequestPredict: ApiServicePredict
         ): LunionRepository =
             instance ?: synchronized(this) {
-                instance ?: LunionRepository(apiRequest, apiRequestAirQuality)
+                instance ?: LunionRepository(apiRequest, apiRequestAirQuality, apiRequestPredict)
             }
     }
 
     val news = MutableLiveData<List<Article>>()
+    val predictionResult = MutableLiveData<List<Prediction>>()
+    val predictionModel = MutableLiveData<PredictionModel>()
     val airQuality = MutableLiveData<Data>()
     val registerSuccess = MutableLiveData<StatusProses>()
     val typeUser = MutableLiveData<String>()
     val dataUser = MutableLiveData<UserModel>()
     val saveDataTreatment = MutableLiveData<StatusProses>()
     val dataTreatment = MutableLiveData<List<TreatmentModel>>()
+
+    fun getPrediction() {
+        apiRequestPredict.getPredictionResult()
+            .enqueue(object : Callback<PredictionResponse> {
+                override fun onResponse(
+                    call: Call<PredictionResponse>,
+                    response: Response<PredictionResponse>
+                ) {
+                    predictionResult.postValue(response.body()?.predictions)
+                }
+
+                override fun onFailure(call: Call<PredictionResponse>, t: Throwable) {
+                    Log.d("Debug:", "retrofit error: $t")
+                }
+            })
+    }
 
     fun getAllNews() {
         apiRequest.getAllNews("lung", "en", API_KEY_NEWS)
