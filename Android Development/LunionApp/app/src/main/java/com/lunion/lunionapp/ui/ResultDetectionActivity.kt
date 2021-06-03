@@ -36,13 +36,24 @@ class ResultDetectionActivity : AppCompatActivity() {
         binding.userName.text = user?.fullname?.split(" ")?.toTypedArray()?.get(0).toString() + " Lung"
 
         binding.btnSubmit.setOnClickListener {
-            viewModel.dataUser.observe(this, { dataDoctor ->
-                val note: String = binding.noteTreatment.text.toString()
-                val diagnose: String = binding.tvResultDiagnose.text.toString()
-                val confidence = binding.tvResultConfidence.text.toString()
-
-                user?.let { it1 -> viewModel.saveDataTreatment(diagnose, confidence, note, it1, dataDoctor) }
-            })
+            if (binding.noteTreatment.text.isNullOrEmpty()){
+                Toast.makeText(this, "Please make some note...!", Toast.LENGTH_LONG).show()
+            }else {
+                viewModel.dataUser.observe(this, { dataDoctor ->
+                    val note: String = binding.noteTreatment.text.toString()
+                    val diagnose: String = binding.tvResultDiagnose.text.toString()
+                    val confidence = binding.tvResultConfidence.text.toString()
+                    user?.let { it1 ->
+                        viewModel.saveDataTreatment(
+                            diagnose,
+                            confidence,
+                            note,
+                            it1,
+                            dataDoctor
+                        )
+                    }
+                })
+            }
         }
 
         viewModel.prediction.observe(this, {

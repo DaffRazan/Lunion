@@ -14,7 +14,6 @@ import com.lunion.lunionapp.databinding.FragmentHistoryTreatmentBinding
 import com.lunion.lunionapp.ui.adapter.TreatmentAdapter
 import com.lunion.lunionapp.viewmodel.HistoryTreatmentViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
-import kotlin.math.log
 
 class HistoryTreatmentFragment : Fragment() {
 
@@ -36,31 +35,36 @@ class HistoryTreatmentFragment : Fragment() {
         checkIsLoading(true)
 
         //type user
-        val typeUser = arguments?.getString("DATA")
-        Log.d("dataku", "type: $typeUser")
+//        val typeUser = arguments?.getString("DATA")
+//        Log.d("dataku", "type: $typeUser")
 
-        // To be added with active Username
-        val nameFirebase = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-        val userActiveName = resources.getString(R.string.text_greetings, "User")
-        viewBinding.tvGreetings.text = userActiveName
 
         //viewModel
         val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[HistoryTreatmentViewModel::class.java]
-        viewModel.getAllTreatment(
-            FirebaseAuth.getInstance().currentUser?.uid.toString(),
-            typeUser.toString()
-        )
+        viewModel.getUserInfo()
 
-        //recyclerView
-        viewBinding.rvTreatment.setHasFixedSize(true)
-        showRecyclerView()
+        viewModel.dataUser.observe(viewLifecycleOwner,{
+            // greeting user
+            val userActiveName = resources.getString(R.string.text_greetings, it.fullname)
+            viewBinding.tvGreetings.text = userActiveName
+
+            viewModel.getAllTreatment(
+                FirebaseAuth.getInstance().currentUser?.uid.toString(),
+                it.type.toString()
+            )
+
+            //recyclerView
+            viewBinding.rvTreatment.setHasFixedSize(true)
+            showRecyclerView(it.type)
+        })
     }
 
-    private fun showRecyclerView() {
+    private fun showRecyclerView(type: String?) {
         checkIsLoading(true)
         viewBinding.rvTreatment.layoutManager = LinearLayoutManager(context)
         val adapter = TreatmentAdapter()
+        adapter.setTypeUser(type)
         viewModel.dataTreatment.observe(viewLifecycleOwner, {
             if (it == null) {
                 viewBinding.lottieNoData.visibility = View.VISIBLE

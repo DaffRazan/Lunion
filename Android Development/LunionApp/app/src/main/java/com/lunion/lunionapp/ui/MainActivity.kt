@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
             val fragment = HistoryTreatmentFragment.newInstance()
             addFragment(fragment)
         } else {
+            viewBinding.bottomNavigationView.menu.removeItem(R.id.nav_air_quality)
+            viewBinding.bottomNavigationView.menu.removeItem(R.id.nav_news)
             val fragment = DetectionFragment.newInstance()
             addFragment(fragment)
         }
