@@ -25,9 +25,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_time"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/icon_time" />
 
         <TextView
             android:id="@+id/date"
@@ -44,7 +44,7 @@
             tools:text="2021-06-01" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/doctor_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -66,12 +66,12 @@
             android:text="@string/khairul"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintBottom_toBottomOf="@+id/doctor_name_text"
+            app:layout_constraintStart_toEndOf="@+id/doctor_name_text"
+            app:layout_constraintTop_toTopOf="@+id/doctor_name_text" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/patient_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
@@ -81,7 +81,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/doctor_name_text" />
 
         <TextView
             android:id="@+id/patient_name"
@@ -92,9 +92,9 @@
             android:text="@string/khairul"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView3"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintBottom_toBottomOf="@+id/patient_name_text"
+            app:layout_constraintStart_toEndOf="@+id/patient_name_text"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_name_text" />
 
         <TextView
             android:id="@+id/textView1"
@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_name_text" />
 
         <TextView
             android:id="@+id/diagnosis"

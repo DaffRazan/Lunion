@@ -1,6 +1,7 @@
 package com.lunion.lunionapp.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lunion.lunionapp.databinding.ItemsTreatmentBinding
@@ -9,10 +10,15 @@ import com.lunion.lunionapp.model.TreatmentModel
 class TreatmentAdapter: RecyclerView.Adapter<TreatmentAdapter.ListViewHolder>() {
 
     private var listTreatment = ArrayList<TreatmentModel>()
+    private var typeUser: String = ""
 
     fun setTreatment(data: List<TreatmentModel>){
         this.listTreatment = data as ArrayList<TreatmentModel>
         notifyDataSetChanged()
+    }
+
+    fun setTypeUser(type: String?){
+        this.typeUser = type.toString()
     }
 
     override fun onCreateViewHolder(
@@ -32,6 +38,13 @@ class TreatmentAdapter: RecyclerView.Adapter<TreatmentAdapter.ListViewHolder>() 
     inner class ListViewHolder(private val binding: ItemsTreatmentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: TreatmentModel){
             with(binding){
+                if (typeUser == "doctor"){
+                    doctorName.visibility = View.GONE
+                    doctorNameText.visibility = View.GONE
+                }else{
+                    patientName.visibility = View.GONE
+                    patientNameText.visibility = View.GONE
+                }
                 date.text = data.date
                 doctorName.text = data.nameDoctor
                 patientName.text = data.namePatient
