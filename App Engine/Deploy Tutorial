@@ -1,4 +1,0 @@
-create webservice using app engine
-open cloud shell and click open editor, then create a new folder whatever the name is.
-open these files:
-main.py app.yaml requirements.txt <<will be attached
