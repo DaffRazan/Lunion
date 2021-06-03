@@ -1,11 +1,14 @@
 package com.lunion.lunionapp.data.retrofit
 
+import com.lunion.lunionapp.utils.Constants.UPLOAD_FILE_LINK
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
-    private val httpClient = OkHttpClient.Builder().build()
+    private val httpClient = OkHttpClient.Builder()
+        .build()
 
     fun make(): ApiService {
         val retrofit = Retrofit.Builder()
@@ -25,5 +28,12 @@ object ApiConfig {
         return retrofit.create(ApiServiceAirQuality::class.java)
     }
 
-
+    fun makePredict(): ApiServicePredict {
+        val retrofit = Retrofit.Builder()
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(UPLOAD_FILE_LINK)
+            .build()
+        return retrofit.create(ApiServicePredict::class.java)
+    }
 }
