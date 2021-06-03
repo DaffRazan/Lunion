@@ -1,10 +1,14 @@
 package com.lunion.lunionapp.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.ActivityMainBinding
 
@@ -17,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         //type user
         val typeUser = intent.getStringExtra("DATA")
-        Log.d("dataku", "Data: $typeUser")
+        Log.d("dataku", "typeUser: $typeUser")
 
         //default select fragment
         if (typeUser.equals("patient")){
@@ -66,6 +70,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.nav_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+                Toast.makeText(this, "LogOut...", Toast.LENGTH_LONG).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
 }
