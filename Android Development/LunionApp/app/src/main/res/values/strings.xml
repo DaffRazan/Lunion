@@ -13,7 +13,7 @@
     <string name="news_page_title_2">Article about lung health and related are displayed here</string>
     <string name="tooltip_text">Search news...</string>
     <string name="text_air_page_1">Discover air quality index</string>
-    <string name="text_air_page2">Get recent air quality index by your recent location</string>
+    <string name="text_air_page2">Get to know air quality condition in your area</string>
     <string name="text_btn_scan">Scan</string>
     <string name="cd_aq">img air</string>
     <string name="text_number_aqi">0</string>
@@ -34,11 +34,11 @@
     <string name="splash_text2">Anywhere, Anytime</string>
     <string name="doctor_nurse">Doctor/Nurse</string>
     <string name="register">Register</string>
-    <string name="name">FullName</string>
+    <string name="name">Full Name</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="don_t_have_account_yet_register_here">Don;t have account yet?, Register here</string>
+    <string name="don_t_have_account_yet_register_here">No account? Register here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email_patient">Email Patient..</string>
@@ -46,15 +46,26 @@
     <string name="submit">Submit</string>
     <string name="andi_s_lung">Andi\'s Lung</string>
     <string name="history">History</string>
-    <string name="list_history_treatment_will_display_here">list history treatment will display here</string>
+    <string name="text_header_treatment">Treatment medical checkup list will display here</string>
     <string name="doctor">Doctor :</string>
     <string name="lorem_inpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="there_is_no_history_of_treatment">There is no history of treatment..</string>
+    <string name="there_is_no_history_of_treatment">There is no history of treatment</string>
     <string name="patient">Patient</string>
     <string name="khairul">Khairul</string>
     <string name="patient2">Patient :</string>
     <string name="welcome_to_lunion">Welcome to Lunion!</string>
-    <string name="app_where_you_can_monitor_your_lung_s_health">App where you can monitor your lung health</string>
+    <string name="text_lunion_tagline">Love your lung by monitoring it everyday</string>
     <string name="logo">Logo</string>
-    <string name="already_have_account_login_here">Already have account?, Login here..!</string>
+    <string name="already_have_account_login_here">Already have account? Login here</string>
+    <string name="text_enable_notif_permission">Please Turn on Your device Location</string>
+    <string name="text_load_register">Please wait, this may take a while...</string>
+    <string name="text_fullname_required">Fullname is required</string>
+    <string name="text_email_required">Email is required</string>
+    <string name="text_password_required">password is required</string>
+    <string name="cd_back">back icon</string>
+    <string name="text_treatment_page_title">History Treatment</string>
+    <string name="nav_logout">Logout</string>
+    <string name="text_diagnose">Diagnose:</string>
+    <string name="text_diagnose_type">Healthy</string>
+    <string name="text_note_consult">Note:</string>
 </resources>

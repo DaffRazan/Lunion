@@ -94,11 +94,12 @@
             android:layout_height="30dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/back_icon"
+            android:background="@drawable/search_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="back icon" />
+            android:contentDescription="@string/cd_back" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

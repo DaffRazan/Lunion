@@ -15,9 +15,15 @@ class DetailNewsActivity : AppCompatActivity() {
         binding = ActivityDetailNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val data = intent.getParcelableExtra<NewsModel>("data")
         if (data != null) {
             bindToUI(data)
+        }
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 
