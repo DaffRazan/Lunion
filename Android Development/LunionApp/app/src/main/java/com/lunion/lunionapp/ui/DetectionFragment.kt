@@ -117,7 +117,6 @@ class DetectionFragment : Fragment() {
         viewModel.dataUser.observe(viewLifecycleOwner, {
             if (it != null) {
                 Toast.makeText(requireContext(), "Please wait for 30 seconds", Toast.LENGTH_LONG).show()
-
                 val handler = Handler()
                 handler.postDelayed({
                     moveResultDetection(it)
