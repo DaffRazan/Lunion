@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     return """
 <form method="POST" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="file">
+    <input type="file" accept="audio/wav" name="file">
     <input type="submit">
 </form>
 """
@@ -63,7 +63,7 @@ def upload():
     # The public URL can be used to directly access the uploaded file via HTTP.
     #url = blob.public_url #.replace('.wav','.json')
     
-    url = "https://storage.googleapis.com/lunion-storage/hasil.json"
+    url = "Upload Succesful!"
     return url
 
 
