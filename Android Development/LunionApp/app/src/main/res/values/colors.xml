@@ -17,4 +17,5 @@
     <color name="danger_air">#bf1363</color>
     <color name="warning_air">#fb9300</color>
     <color name="healthy_air">#39a6a3</color>
+    <color name="text_attention">#FF5D51</color>
 </resources>

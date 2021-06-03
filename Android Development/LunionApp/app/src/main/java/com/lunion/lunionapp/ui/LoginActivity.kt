@@ -16,7 +16,7 @@ import com.lunion.lunionapp.viewmodel.ViewModelFactory
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var progrssDialog: ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
     private lateinit var viewModel: LoginRegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.registerSuccess.observe(this, {
             if (it.status == true){
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                progrssDialog.dismiss()
+                progressDialog.dismiss()
                 viewModel.typeUser.observe(this, {typeUser ->
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("DATA", typeUser)
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                 })
             }else if(it.status == false){
                 Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_LONG).show()
-                progrssDialog.dismiss()
+                progressDialog.dismiss()
             }
         })
 
@@ -93,11 +93,11 @@ class LoginActivity : AppCompatActivity() {
             ).show()
 
             else -> {
-                progrssDialog = ProgressDialog(this)
-                progrssDialog.setTitle("Login")
-                progrssDialog.setMessage("Please wait, this may take a while...")
-                progrssDialog.setCanceledOnTouchOutside(false)
-                progrssDialog.show()
+                progressDialog = ProgressDialog(this)
+                progressDialog.setTitle("Login")
+                progressDialog.setMessage("Please wait, this may take a while...")
+                progressDialog.setCanceledOnTouchOutside(false)
+                progressDialog.show()
 
                 viewModel.loginToApp(email, password)
 

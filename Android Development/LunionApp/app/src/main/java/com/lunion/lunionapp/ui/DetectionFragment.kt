@@ -1,5 +1,6 @@
 package com.lunion.lunionapp.ui
 
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -8,24 +9,21 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.JsResult
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.FragmentDetectionBinding
-import com.lunion.lunionapp.model.PredictionModel
 import com.lunion.lunionapp.model.UserModel
 import com.lunion.lunionapp.utils.Constants.UPLOAD_FILE_LINK
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
-import java.util.*
+
 
 class DetectionFragment : Fragment() {
     private lateinit var viewBinding: FragmentDetectionBinding
@@ -51,9 +49,32 @@ class DetectionFragment : Fragment() {
 
         viewBinding.wvUploadFile.loadUrl(UPLOAD_FILE_LINK)
         viewBinding.wvUploadFile.settings.allowFileAccess = true
+        viewBinding.wvUploadFile.settings.allowContentAccess = true
         viewBinding.wvUploadFile.settings.javaScriptEnabled = true
 
+        // setup webChromeClient
         viewBinding.wvUploadFile.webChromeClient = object : WebChromeClient() {
+
+            override fun onJsAlert(
+                view: WebView,
+                url: String,
+                message: String,
+                result: JsResult
+            ): Boolean {
+                Log.d("alert", message)
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+
+                dialogBuilder.setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { _, _ ->
+                        result.confirm()
+                    }
+
+                val alert = dialogBuilder.create()
+                alert.show()
+
+                return true
+            }
 
             override fun onShowFileChooser(
                 mWebView: WebView,
@@ -95,12 +116,13 @@ class DetectionFragment : Fragment() {
 
         viewModel.dataUser.observe(viewLifecycleOwner, {
             if (it != null) {
-                Log.d("dataku", "data: ${it.email}")
+                Toast.makeText(requireContext(), "Please wait for 30 seconds", Toast.LENGTH_LONG).show()
+
                 val handler = Handler()
                 handler.postDelayed({
                     moveResultDetection(it)
                     checkIsLoading(false)
-                }, 4000)
+                }, 30000)
             } else {
                 Toast.makeText(requireContext(), "Email doesn't exists...", Toast.LENGTH_LONG)
                     .show()
@@ -109,8 +131,6 @@ class DetectionFragment : Fragment() {
         })
 
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -151,9 +171,9 @@ class DetectionFragment : Fragment() {
     }
 
     private fun checkIsLoading(data: Boolean) {
-        if (data){
+        if (data) {
             viewBinding.progressBar.visibility = View.VISIBLE
-        }else{
+        } else {
             viewBinding.progressBar.visibility = View.INVISIBLE
         }
     }
