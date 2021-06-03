@@ -38,19 +38,17 @@ class ResultDetectionActivity : AppCompatActivity() {
         binding.btnSubmit.setOnClickListener {
             viewModel.dataUser.observe(this, { dataDoctor ->
                 val note: String = binding.noteTreatment.text.toString()
-                val diagnose: String = binding.tvDiagnoseType.text.toString()
+                val diagnose: String = binding.tvResultDiagnose.text.toString()
                 val confidence = binding.tvResultConfidence.text.toString()
 
                 user?.let { it1 -> viewModel.saveDataTreatment(diagnose, confidence, note, it1, dataDoctor) }
             })
         }
 
-        //GET prediction result intent
         viewModel.prediction.observe(this, {
             Log.d("dataku", "dataa : "+it.prediction)
 
             binding.tvResultDiagnose.text = it.prediction
-            binding.tvDiagnoseType.text = it.prediction
 
             val percent = it.confidence.toInt().toString() +"%"
             binding.tvResultConfidence.text = percent

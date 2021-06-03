@@ -10,7 +10,7 @@
     <string name="tv_file_name">file name</string>
     <string name="text_result_diagnose">Result type Diagnose</string>
     <string name="news_page_title">Discover News</string>
-    <string name="news_page_title_2">Article about lung health and related are displayed here</string>
+    <string name="news_page_title_2">All articles about lung shows here</string>
     <string name="tooltip_text">Search news...</string>
     <string name="text_air_page_1">Discover air quality index</string>
     <string name="text_air_page2">Get to know air quality condition in your area</string>
@@ -24,9 +24,9 @@
     <string name="tv_article_time">30 min ago</string>
     <string name="tv_source">BBC News</string>
     <string name="tv_news_content">lorem ipsum</string>
-    <string name="tv_result_page">Result</string>
+    <string name="tv_result_page">Prediction Result</string>
     <string name="tv_diagnose_result">Asthma Diagnose</string>
-    <string name="tv_detect_page">Upload lungs sound here so it can be predicted</string>
+    <string name="tv_detect_page">Early detection which provide result and confidence prediction</string>
     <string name="cd_img_detail_news">Image article</string>
     <string name="text_latlon">lat: 0342, Lon: 0342</string>
     <string name="text_loc">Banda aceh</string>
@@ -41,18 +41,18 @@
     <string name="don_t_have_account_yet_register_here">No account? Register here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email_patient">Email Patient..</string>
+    <string name="email_patient">Enter patient email...</string>
     <string name="add_note_treatment">Add note Treatment...</string>
     <string name="submit">Submit</string>
     <string name="andi_s_lung">Andi\'s Lung</string>
     <string name="history">History</string>
-    <string name="text_header_treatment">Treatment medical checkup list will display here</string>
-    <string name="doctor">Doctor :</string>
+    <string name="text_header_treatment">Treatment medical checkup list shows here</string>
+    <string name="doctor">Doctor:</string>
     <string name="lorem_inpsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="there_is_no_history_of_treatment">There is no history of treatment</string>
+    <string name="text_no_treatment">No history of treatment right now</string>
     <string name="patient">Patient</string>
     <string name="khairul">Khairul</string>
-    <string name="patient2">Patient :</string>
+    <string name="patient2">Patient:</string>
     <string name="welcome_to_lunion">Welcome to Lunion!</string>
     <string name="text_lunion_tagline">Love your lung by monitoring it everyday</string>
     <string name="logo">Logo</string>
@@ -69,7 +69,10 @@
     <string name="text_diagnose_type">Healthy</string>
     <string name="text_note_consult">Note:</string>
     <string name="text_confidence">Confidence result</string>
-    <string name="please_wait_15_second_after_sending_audio_file_and_upload_success_displayed_then_klik_detect_button">Please wait 15 second after sending audio file and \'upload success\' displayed, then klik Detect Button</string>
-    <string name="confidence">Confidence :</string>
+    <string name="attention">Please upload .wav sound first then fill email field</string>
+    <string name="confidence">Confidence:</string>
     <string name="_0">0%</string>
+    <string name="text_greetings">Hello, %s</string>
+    <string name="text_notes">Give notes to patient</string>
+    <string name="text_email_field">Enter patient\'s email</string>
 </resources>

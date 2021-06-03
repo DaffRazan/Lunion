@@ -57,14 +57,12 @@ class LunionRepository(
     val dataTreatment = MutableLiveData<List<TreatmentModel>>()
 
     fun getPrediction() {
-        Log.d("dataku", "masuk ke getPredict")
         apiRequestPredict.getPredictionResult()
             .enqueue(object : Callback<PredictResponse> {
                 override fun onResponse(
                     call: Call<PredictResponse>,
                     response: Response<PredictResponse>
                 ) {
-                    Log.d("dataku", "hasil api = ${response.body()}")
                     predictionModel.postValue(response.body()?.let { DataMapper.mapPredictToPredictModel(it)})
                 }
 
