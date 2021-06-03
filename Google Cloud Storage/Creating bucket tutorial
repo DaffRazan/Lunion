@@ -1,4 +1,0 @@
-create new bucket with globally unique name lunion-storage
-specify the zone to the closest one *asia-southeast2 (Jakarta)
-standard bucket and uniform access
-set permissions by adding allUsers as Storage Admin *will expose public url for each objects
