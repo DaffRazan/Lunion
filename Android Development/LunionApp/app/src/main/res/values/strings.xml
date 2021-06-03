@@ -5,10 +5,10 @@
     <string name="nav_air_quality">Air Quality</string>
     <string name="detect_page_title">Upload Lung Sound</string>
     <string name="btn_select_file">select file</string>
-    <string name="btn_detect_lung">Detect lung</string>
+    <string name="btn_detect_lung">Detect</string>
     <string name="cd_lung">lung image</string>
     <string name="tv_file_name">file name</string>
-    <string name="text_result_diagnose">Result and confidence Diagnose</string>
+    <string name="text_result_diagnose">Result type Diagnose</string>
     <string name="news_page_title">Discover News</string>
     <string name="news_page_title_2">Article about lung health and related are displayed here</string>
     <string name="tooltip_text">Search news...</string>
@@ -68,4 +68,5 @@
     <string name="text_diagnose">Diagnose:</string>
     <string name="text_diagnose_type">Healthy</string>
     <string name="text_note_consult">Note:</string>
+    <string name="text_confidence">Confidence result</string>
 </resources>
