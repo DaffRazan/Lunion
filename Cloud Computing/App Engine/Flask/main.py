@@ -16,7 +16,7 @@ app = Flask(__name__)
 def index():
     return """
 <form method="POST" action="/upload" enctype="multipart/form-data">
-    <input type="file" accept="audio/wav" name="file">
+    <input type="file" accept="audio/*" name="file">
     <input type="submit">
 </form>
 """
