@@ -2,19 +2,17 @@ package com.lunion.lunionapp.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.lunion.lunionapp.data.response.prediction.Prediction
 import com.lunion.lunionapp.databinding.ActivityResultDetectionBinding
-import com.lunion.lunionapp.model.PredictionModel
 import com.lunion.lunionapp.model.UserModel
-import com.lunion.lunionapp.utils.DataMapper
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
 
 class ResultDetectionActivity : AppCompatActivity() {
-    lateinit var binding: ActivityResultDetectionBinding
+    private lateinit var binding: ActivityResultDetectionBinding
     lateinit var viewModel: DetectionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +22,9 @@ class ResultDetectionActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        //loading
+        checkIsLoading(true)
+
         //viewModel
         val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[DetectionViewModel::class.java]
@@ -32,24 +33,29 @@ class ResultDetectionActivity : AppCompatActivity() {
 
         //get intent
         val user = intent.getParcelableExtra<UserModel>("DATA")
-        binding.userName.text =
-            user?.fullname?.split(" ")?.toTypedArray()?.get(0).toString() + " Lung"
+        binding.userName.text = user?.fullname?.split(" ")?.toTypedArray()?.get(0).toString() + " Lung"
 
         binding.btnSubmit.setOnClickListener {
             viewModel.dataUser.observe(this, { dataDoctor ->
                 val note: String = binding.noteTreatment.text.toString()
                 val diagnose: String = binding.tvDiagnoseType.text.toString()
+                val confidence = binding.tvResultConfidence.text.toString()
 
-                user?.let { it1 -> viewModel.saveDataTreatment(diagnose, note, it1, dataDoctor) }
+                user?.let { it1 -> viewModel.saveDataTreatment(diagnose, confidence, note, it1, dataDoctor) }
             })
         }
 
         //GET prediction result intent
         viewModel.prediction.observe(this, {
-            Log.d("resultdiagnose", it.prediction)
+            Log.d("dataku", "dataa : "+it.prediction)
 
             binding.tvResultDiagnose.text = it.prediction
-            binding.tvResultConfidence.text = it.confidence.toString()
+            binding.tvDiagnoseType.text = it.prediction
+
+            val percent = it.confidence.toInt().toString() +"%"
+            binding.tvResultConfidence.text = percent
+
+            checkIsLoading(false)
         })
 
         //observer
@@ -62,8 +68,12 @@ class ResultDetectionActivity : AppCompatActivity() {
 
     }
 
-    private fun bindToUi(predictionModel: PredictionModel) {
-        binding.tvResultDiagnose.text = predictionModel.prediction
-        binding.tvResultConfidence.text = predictionModel.confidence.toString()
+    private fun checkIsLoading(data: Boolean) {
+        if (data){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.INVISIBLE
+        }
     }
+
 }

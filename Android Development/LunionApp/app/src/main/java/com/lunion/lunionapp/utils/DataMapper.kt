@@ -1,7 +1,7 @@
 package com.lunion.lunionapp.utils
 
 import com.lunion.lunionapp.data.response.news.Article
-import com.lunion.lunionapp.data.response.prediction.Prediction
+import com.lunion.lunionapp.data.response.prediction.PredictResponse
 import com.lunion.lunionapp.model.NewsModel
 import com.lunion.lunionapp.model.PredictionModel
 
@@ -19,10 +19,10 @@ object DataMapper {
         )
     }
 
-    fun mapPredictToPredictModel(data: Prediction): PredictionModel {
+    fun mapPredictToPredictModel(data: PredictResponse): PredictionModel {
         return PredictionModel(
-            prediction = data.prediction,
-            confidence = data.confidence
+            prediction = data.Prediction,
+            confidence = data.Confidence
         )
     }
 }
