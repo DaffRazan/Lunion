@@ -9,21 +9,21 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.*
+import android.webkit.JsResult
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.lunion.lunionapp.R
 import com.lunion.lunionapp.databinding.FragmentDetectionBinding
-import com.lunion.lunionapp.model.PredictionModel
 import com.lunion.lunionapp.model.UserModel
 import com.lunion.lunionapp.utils.Constants.UPLOAD_FILE_LINK
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
-import java.util.*
+
 
 class DetectionFragment : Fragment() {
     private lateinit var viewBinding: FragmentDetectionBinding
@@ -117,6 +117,7 @@ class DetectionFragment : Fragment() {
         viewModel.dataUser.observe(viewLifecycleOwner, {
             if (it != null) {
                 Toast.makeText(requireContext(), "Please wait for 30 seconds", Toast.LENGTH_LONG).show()
+
                 val handler = Handler()
                 handler.postDelayed({
                     moveResultDetection(it)
