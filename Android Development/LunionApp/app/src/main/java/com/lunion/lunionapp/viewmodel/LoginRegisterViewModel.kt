@@ -15,6 +15,8 @@ class LoginRegisterViewModel(private val repository: LunionRepository): ViewMode
         this.typeUser = repository.typeUser
     }
 
+    fun getuserInfo()  = repository.getUserInfo()
+
     fun loginToApp(email: String, password: String) = repository.loginToApp(email, password)
 
     fun registerToApp(fullname: String,

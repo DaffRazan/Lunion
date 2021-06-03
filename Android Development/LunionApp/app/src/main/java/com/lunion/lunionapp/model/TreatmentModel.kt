@@ -8,6 +8,7 @@ data class TreatmentModel(
     val treatmentId: String? = null,
     val patientId: String? = null,
     val diagnose: String? = null,
+    val confidence: String? = null,
     val note: String? = null,
     val doctorId: String? = null,
     val date: String? = null,

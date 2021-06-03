@@ -8,12 +8,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.lunion.lunionapp.BuildConfig.API_KEY_AQI
 import com.lunion.lunionapp.BuildConfig.API_KEY_NEWS
-import com.lunion.lunionapp.data.response.prediction.PredictionResponse
 import com.lunion.lunionapp.data.response.air.AirQualityResponse
 import com.lunion.lunionapp.data.response.air.Data
 import com.lunion.lunionapp.data.response.news.Article
 import com.lunion.lunionapp.data.response.news.NewsResponse
-import com.lunion.lunionapp.data.response.prediction.Prediction
+import com.lunion.lunionapp.data.response.prediction.PredictResponse
 import com.lunion.lunionapp.data.retrofit.ApiService
 import com.lunion.lunionapp.data.retrofit.ApiServiceAirQuality
 import com.lunion.lunionapp.data.retrofit.ApiServicePredict
@@ -22,6 +21,7 @@ import com.lunion.lunionapp.model.StatusProses
 import com.lunion.lunionapp.model.TreatmentModel
 import com.lunion.lunionapp.model.UserModel
 import com.lunion.lunionapp.utils.Constants.BUCKET_LINK
+import com.lunion.lunionapp.utils.DataMapper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,7 +48,6 @@ class LunionRepository(
     }
 
     val news = MutableLiveData<List<Article>>()
-    val predictionResult = MutableLiveData<List<Prediction>>()
     val predictionModel = MutableLiveData<PredictionModel>()
     val airQuality = MutableLiveData<Data>()
     val registerSuccess = MutableLiveData<StatusProses>()
@@ -58,16 +57,18 @@ class LunionRepository(
     val dataTreatment = MutableLiveData<List<TreatmentModel>>()
 
     fun getPrediction() {
+        Log.d("dataku", "masuk ke getPredict")
         apiRequestPredict.getPredictionResult()
-            .enqueue(object : Callback<PredictionResponse> {
+            .enqueue(object : Callback<PredictResponse> {
                 override fun onResponse(
-                    call: Call<PredictionResponse>,
-                    response: Response<PredictionResponse>
+                    call: Call<PredictResponse>,
+                    response: Response<PredictResponse>
                 ) {
-                    predictionResult.postValue(response.body()?.predictions)
+                    Log.d("dataku", "hasil api = ${response.body()}")
+                    predictionModel.postValue(response.body()?.let { DataMapper.mapPredictToPredictModel(it)})
                 }
 
-                override fun onFailure(call: Call<PredictionResponse>, t: Throwable) {
+                override fun onFailure(call: Call<PredictResponse>, t: Throwable) {
                     Log.d("Debug:", "retrofit error: $t")
                 }
             })
@@ -219,7 +220,7 @@ class LunionRepository(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun saveDataTreatment(diagnose: String, note: String, user: UserModel, dataDoctor: UserModel) {
+    fun saveDataTreatment(diagnose: String, confidence: String, note: String, user: UserModel, dataDoctor: UserModel) {
         val treatmentMap = HashMap<String, Any>()
         val reff =
             FirebaseDatabase.getInstance(BUCKET_LINK).reference.child(
@@ -231,6 +232,7 @@ class LunionRepository(
         treatmentMap["treatmentId"] = treatmentId
         treatmentMap["patientId"] = user.uid.toString()
         treatmentMap["diagnose"] = diagnose
+        treatmentMap["confidence"] = confidence
         treatmentMap["note"] = note
         treatmentMap["doctorId"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
         treatmentMap["date"] = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE).toString()
@@ -248,6 +250,7 @@ class LunionRepository(
         treatmentMap2["treatmentId"] = treatmentId
         treatmentMap2["patientId"] = user.uid.toString()
         treatmentMap2["diagnose"] = diagnose
+        treatmentMap2["confidence"] = confidence
         treatmentMap2["note"] = note
         treatmentMap2["doctorId"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
         treatmentMap2["date"] = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE).toString()

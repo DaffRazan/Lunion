@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -24,13 +25,13 @@ import com.lunion.lunionapp.model.UserModel
 import com.lunion.lunionapp.utils.Constants.UPLOAD_FILE_LINK
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
+import java.util.*
 
 class DetectionFragment : Fragment() {
     private lateinit var viewBinding: FragmentDetectionBinding
     private lateinit var viewModel: DetectionViewModel
 
     var uploadMessage: ValueCallback<Array<Uri>>? = null
-    private val FILE_CHOOSER_RESULTCODE = 1
     val REQUEST_CODE_SELECT_FILE = 100
 
     override fun onCreateView(
@@ -87,20 +88,29 @@ class DetectionFragment : Fragment() {
 
         //detection n move resultDetectionActivity
         viewBinding.btnDetectLung.setOnClickListener {
+            //loader
+            checkIsLoading(true)
             viewModel.checkEmailPatient(viewBinding.emailPatient.text.toString())
         }
 
         viewModel.dataUser.observe(viewLifecycleOwner, {
             if (it != null) {
                 Log.d("dataku", "data: ${it.email}")
-                moveResultDetection(it)
+                val handler = Handler()
+                handler.postDelayed({
+                    moveResultDetection(it)
+                    checkIsLoading(false)
+                }, 4000)
             } else {
                 Toast.makeText(requireContext(), "Email doesn't exists...", Toast.LENGTH_LONG)
                     .show()
+                checkIsLoading(false)
             }
         })
 
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -137,6 +147,14 @@ class DetectionFragment : Fragment() {
             val args = Bundle()
             fragment.arguments = args
             return fragment
+        }
+    }
+
+    private fun checkIsLoading(data: Boolean) {
+        if (data){
+            viewBinding.progressBar.visibility = View.VISIBLE
+        }else{
+            viewBinding.progressBar.visibility = View.INVISIBLE
         }
     }
 

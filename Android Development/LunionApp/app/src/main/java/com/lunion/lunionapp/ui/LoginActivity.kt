@@ -4,9 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.lunion.lunionapp.databinding.ActivityLoginBinding
 import com.lunion.lunionapp.viewmodel.LoginRegisterViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
@@ -24,9 +26,25 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        //loading
+        checkIsLoading(true)
+
         //viewModel
         val factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[LoginRegisterViewModel::class.java]
+
+        if (FirebaseAuth.getInstance().currentUser != null){
+            viewModel.getuserInfo()
+            viewModel.typeUser.observe(this,{
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("DATA", it)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            })
+        }else{
+            checkIsLoading(false)
+        }
 
         //go to register
         binding.txtRegister.setOnClickListener {
@@ -84,6 +102,14 @@ class LoginActivity : AppCompatActivity() {
                 viewModel.loginToApp(email, password)
 
             }
+        }
+    }
+
+    private fun checkIsLoading(data: Boolean) {
+        if (data){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.INVISIBLE
         }
     }
 

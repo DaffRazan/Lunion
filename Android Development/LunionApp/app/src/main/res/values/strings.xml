@@ -69,4 +69,7 @@
     <string name="text_diagnose_type">Healthy</string>
     <string name="text_note_consult">Note:</string>
     <string name="text_confidence">Confidence result</string>
+    <string name="please_wait_15_second_after_sending_audio_file_and_upload_success_displayed_then_klik_detect_button">Please wait 15 second after sending audio file and \'upload success\' displayed, then klik Detect Button</string>
+    <string name="confidence">Confidence :</string>
+    <string name="_0">0%</string>
 </resources>

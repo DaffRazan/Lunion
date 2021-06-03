@@ -37,6 +37,7 @@ class TreatmentAdapter: RecyclerView.Adapter<TreatmentAdapter.ListViewHolder>() 
                 patientName.text = data.namePatient
                 diagnosis.text = data.diagnose
                 note.text = data.note
+                confidence.text = data.confidence
             }
         }
     }

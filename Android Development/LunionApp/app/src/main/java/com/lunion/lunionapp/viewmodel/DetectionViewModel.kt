@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.lunion.lunionapp.data.LunionRepository
-import com.lunion.lunionapp.data.response.prediction.Prediction
 import com.lunion.lunionapp.model.PredictionModel
 import com.lunion.lunionapp.model.StatusProses
 import com.lunion.lunionapp.model.UserModel
@@ -27,9 +26,9 @@ class DetectionViewModel(private val repository: LunionRepository) : ViewModel()
 
     fun getUserInfo() = repository.getUserInfo()
 
-    fun saveDataTreatment(diagnose: String, note: String, user: UserModel, dataDoctor: UserModel) {
+    fun saveDataTreatment(diagnose: String, confidence: String, note: String, user: UserModel, dataDoctor: UserModel) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            repository.saveDataTreatment(diagnose, note, user, dataDoctor)
+            repository.saveDataTreatment(diagnose, confidence, note, user, dataDoctor)
         }
     }
 
