@@ -1,0 +1,25 @@
+first
+create bucket in cloud storage
+add permissions allUsers as storage admin so that public can access it
+
+second
+create new model in AI Platform
+create new version AI Platform
+deploy Machine Learning model in AI Platform (model and version are adjusting to the Machine Learning)
+
+third
+create cloud function triggered by storage finalize/create
+the script is in cloud function.py (tested locally by Machine Learning) as well as the requirements.txt
+
+fourth
+create webservice using app engine
+open cloud shell and click open editor, then create a new folder whatever the name is.
+open these files:
+main.py app.yaml requirements.txt <<will be attached
+
+do these steps to test if all is working:
+http://www.yamllint.com/ just paste the yaml code here to check the code validation
+move to the directory by typing in cloud shell: cd [destination folder], in this case cd lunion (type ls to see the list inside the directory)
+then python3 main.py
+click web preview -> preview on port 8080
+if everything is ok run: gcloud app deploy
