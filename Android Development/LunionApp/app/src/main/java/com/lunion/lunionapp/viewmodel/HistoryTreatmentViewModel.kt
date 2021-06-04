@@ -1,7 +1,6 @@
 package com.lunion.lunionapp.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lunion.lunionapp.data.LunionRepository
 import com.lunion.lunionapp.model.TreatmentModel

@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/text_greetings"
+        tools:text="@string/text_greetings"
         android:textColor="@color/primary_color"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

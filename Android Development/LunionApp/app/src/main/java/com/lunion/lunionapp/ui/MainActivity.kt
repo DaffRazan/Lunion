@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     addFragment(fragment)
                 }
             }
-            false
+            true
         }
 
     }
