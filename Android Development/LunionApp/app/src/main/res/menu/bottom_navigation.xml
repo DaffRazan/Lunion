@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/nav_detection"
         android:title="@string/nav_detect"
@@ -17,5 +16,4 @@
         android:id="@+id/nav_air_quality"
         android:title="@string/nav_air_quality"
         android:icon="@drawable/air"/>
-
 </menu>

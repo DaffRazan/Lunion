@@ -24,7 +24,6 @@ import com.lunion.lunionapp.utils.Constants.UPLOAD_FILE_LINK
 import com.lunion.lunionapp.viewmodel.DetectionViewModel
 import com.lunion.lunionapp.viewmodel.ViewModelFactory
 
-
 class DetectionFragment : Fragment() {
     private lateinit var viewBinding: FragmentDetectionBinding
     private lateinit var viewModel: DetectionViewModel

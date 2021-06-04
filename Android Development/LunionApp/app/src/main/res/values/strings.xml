@@ -26,7 +26,7 @@
     <string name="tv_news_content">lorem ipsum</string>
     <string name="tv_result_page">Prediction Result</string>
     <string name="tv_diagnose_result">Asthma Diagnose</string>
-    <string name="tv_detect_page">Early detection which provide result and confidence prediction</string>
+    <string name="tv_detect_page">Early detection which provides the prediction of lung\'s disease result and confidence </string>
     <string name="cd_img_detail_news">Image article</string>
     <string name="text_latlon">lat: 0342, Lon: 0342</string>
     <string name="text_loc">Banda aceh</string>
@@ -68,12 +68,15 @@
     <string name="text_diagnose">Diagnose:</string>
     <string name="text_diagnose_type">Healthy</string>
     <string name="text_note_consult">Note:</string>
-    <string name="text_confidence">Confidence result</string>
+    <string name="text_confidence">%s</string>
     <string name="attention">Please upload .wav sound first then fill email field</string>
     <string name="confidence">Confidence:</string>
     <string name="_0">0%</string>
-    <string name="text_greetings">Hello, %s</string>
+    <string name="text_greetings">Hello, %s!</string>
     <string name="text_notes">Give notes to patient</string>
     <string name="text_email_field">Enter patient\'s email</string>
     <string name="icon_time">icon time</string>
+    <string name="text_button_send">Send</string>
+    <string name="text_possible_type_disease">possible type diseases</string>
+    <string name="text_possible_disease">Possible Disease</string>
 </resources>

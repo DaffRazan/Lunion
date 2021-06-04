@@ -257,7 +257,7 @@ class LunionRepository(
 
         reff2.child(treatmentId).updateChildren(treatmentMap2)
 
-        saveDataTreatment.postValue(StatusProses(true, "Success save data treatment.."))
+        saveDataTreatment.postValue(StatusProses(true, "Send notes treatment success!"))
 
     }
 
