@@ -1,6 +1,11 @@
 # 🚀 Lunion
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/DaffRazan/Lunion/blob/master/Machine%20Learning/Deep%20Learning%20pendeteksi%20penyakit%20paru.ipynb)
+Lung disease is one of the highest causes of death worldwide. Simple early detection can
+reduce death rate by hearing the sound of a patient's lung using a stethoscope. However, the
+access to detect this disease is still lacking and the results of the doctor's diagnosis are prone to
+errors. To tackle these problems, we build a mobile application that detects lung diseases based
+on the respiratory sound of patients.
 
 # 📌 Usage 📌
 
