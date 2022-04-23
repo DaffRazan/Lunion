@@ -40,3 +40,5 @@ on the respiratory sound of patients.
 * Read database
 * Plug in real device with USB or connect via bluetooth to PC
 * Run the application with the real device or emulator via AVD Manager
+---
+* The app-debug.apk file from the folder *Lunion\Android Development\Simple Android Audio Classification App* can directly be installed on to any device. The app also has the capability to directly boot-up onto any device when the device is powered on.
